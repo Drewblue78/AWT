@@ -3,16 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
     <title>Puzzle</title>
     <script src="js/jsPuzzle.js">
     </script>
 </head>
 <body onload="init();">
-</br>
+</br> 
+<form onsubmit="sendData(event)">
+    <input name="username" placeholder="username"/>
+    <input name="password" placeholder="password" type="password" />
+    <input type="submit"/>
+<canvas id="myCanvas" width="640" height="420" style="border:1px solid #000000;">
+</canvas>
 
-</form>
 </br></br></br>
     <div style="width: 100%">
     
@@ -20,9 +24,9 @@
     <button type="button" onClick="location.href='puzzle.html'" class="btn btn-primary btn-lg"style="width: 12%;">Puzzle</button><br/><br/>
     <button type="button" class="btn btn-primary btn-lg"style="width: 12%;">Movie</button><br/><br/>
     <button type="button" class="btn btn-primary btn-lg"style="width: 12%;">More</button><br/><br/>
-</div>
-</div>
+    </div>
 
+</form>   
 </body>
 
 </html>

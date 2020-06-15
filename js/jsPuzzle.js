@@ -50,7 +50,7 @@ function onImage(e){
 function createTitle(msg){
     _stage.fillStyle = "#000000";
     _stage.globalAlpha = .4;
-    _stage.fillRect(100,_puzzleHeight - 40,_puzzleWidth - 200,40);
+    _stage.fillRect(420,_puzzleHeight - 40,_puzzleWidth - 640,40);
     _stage.fillStyle = "#FFFFFF";
     _stage.globalAlpha = 1;
     _stage.textAlign = "center";
