@@ -1,0 +1,5 @@
+main {
+    background-image: url("/img/Spiderman.jpg");
+    min-height: 400px;
+    background-size: cover;
+}
