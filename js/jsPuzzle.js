@@ -20,8 +20,17 @@ function init() {
     _img.src = "img/Spiderman.jpg";
 }
 
+function onImage(e) {
+    _pieceWidth = Math.floor(_img.width / PUZZLE_DIFFICULTY)
+    _pieceHeight = Math.floor(_img.height / PUZZLE_DIFFICULTY)
+    _puzzleWidth = _pieceWidth * PUZZLE_DIFFICULTY;
+    _puzzleHeight = _pieceHeight * PUZZLE_DIFFICULTY;
+    setCanvas();
+    initPuzzle();
+}
+
 function setCanvas() {
-    _canvas = document.getElementById('myCanvas');
+    _canvas = document.getElementById('canvas');
     _stage = _canvas.getContext('2d');
     _canvas.width = _puzzleWidth;
     _canvas.height = _puzzleHeight;
@@ -38,19 +47,10 @@ function initPuzzle() {
     buildPieces();
 }
 
-function onImage(e) {
-    _pieceWidth = Math.floor(_img.width / PUZZLE_DIFFICULTY)
-    _pieceHeight = Math.floor(_img.height / PUZZLE_DIFFICULTY)
-    _puzzleWidth = _pieceWidth * PUZZLE_DIFFICULTY;
-    _puzzleHeight = _pieceHeight * PUZZLE_DIFFICULTY;
-    setCanvas();
-    initPuzzle();
-}
-
 function createTitle(msg) {
     _stage.fillStyle = "#000000";
     _stage.globalAlpha = .4;
-    _stage.fillRect(420, _puzzleHeight - 40, _puzzleWidth - 640, 40);
+    _stage.fillRect(100, _puzzleHeight - 40, _puzzleWidth - 200, 40);
     _stage.fillStyle = "#FFFFFF";
     _stage.globalAlpha = 1;
     _stage.textAlign = "center";
@@ -70,10 +70,9 @@ function buildPieces() {
         piece.sy = yPos;
         _pieces.push(piece);
         xPos += _pieceWidth;
-        if (xPos >= _pieceWidth) {
+        if (xPos >= _puzzleWidth) {
             xPos = 0;
             yPos += _pieceHeight;
-
         }
     }
     document.onmousedown = shufflePuzzle;
@@ -121,7 +120,6 @@ function onPuzzleCLick(e) {
         _stage.clearRect(_currentPiece.xPos, _currentPiece.yPos, _pieceWidth, _pieceHeight);
         _stage.save();
         _stage.globalAlpha = .9;
-
         _stage.drawImage(_img, _currentPiece.sx, _currentPiece.sy,
             _pieceWidth, _pieceHeight, _mouse.x - (_pieceWidth / 2),
             _mouse.y - (pieceHeight / 2), _pieceWidth, _pieceHeight);
@@ -135,8 +133,8 @@ function onPuzzleCLick(e) {
 function checkPieceCLicked() {
     var i;
     var piece;
-    for (i = 0; i < _piece.length; i++) {
-        piece = _piece[i];
+    for (i = 0; i < _pieces.length; i++) {
+        piece = _pieces[i];
         if (_mouse.x < piece.xPos || _mouse.x > (piece.xPos + _pieceWidth) ||
             _mouse.y < piece.yPos || _mouse.y > (piece.yPos + _pieceHeight)) {
         }
@@ -161,7 +159,7 @@ function updatePuzzle(e) {
     var i;
     var piece;
     for (i = 0; i < _piece.length; i++) {
-        piece = _piece[i];
+        piece = _pieces[i];
         if (piece == _currentPiece) {
             continue;
         }
@@ -176,7 +174,7 @@ function updatePuzzle(e) {
             else {
                 _currentDropPiece = piece;
                 _stage.save();
-                _stage.globalAlpha = 4;
+                _stage.globalAlpha = .4;
                 _stage.fillStyle = PUZZLE_HOVER_TINT;
                 _stage.fillRect(_currentDropPiece.xPos, _currentDropPiece.yPos, _pieceWidth, _pieceHeight);
                 _stage.restore();
@@ -209,6 +207,7 @@ function pieceDropped(e) {
 
 function resetPuzzleAndCheckWin() {
     _stage.clearRect(0, 0, _puzzleWidth, _puzzleHeight);
+    var gameWin = true;
     var i;
     var piece;
     for (i = 0; i < _pieces.length; i++) {
