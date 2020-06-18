@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+        integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/Master.css" />
+
+    <title>Spider-Tracer-Tracker</title>
+    <script src="js/tracker.js">
+    </script>
+
+
+    <style scoped>
+        ul {
+            margin: 0;
+            list-style-type: none;
+            background-color: rgb(197, 5, 5);
+        }
+
+        li {
+            display: inline-block;
+            color: #eee;
+            padding: 10px 20px;
+        }
+
+        li:hover {
+            background-color: rgb(50, 0, 116);
+        }
+    </style>
+</head>
+
+<body>
+
+    <ul>
+        <li id="Home" onclick="location.href='index.html'">Home</li>
+        <li id="Puzzle" onclick="location.href='puzzle.html'">Puzzle</li>
+        <li id="Movie" onclick="location.href='movie.html'">Movie</li>
+        <li id="Tracker" onclick="location.href='tracker.html'">Tracker</li>
+    </ul>
+
+    <div id=" csstextalign">
+
+        <div id="csspadding">
+
+            <form onsubmit="sendData(event)">
+                <input name="username" placeholder="username" />
+                <input name="password" placeholder="password" type="password" />
+                <input type="submit" />
+            </form>
+            </br>
+            <div id="wrapper">
+                <button id="location-button">Get User Location</button>
+                <div id="output"></div>
+            </div>
+            <script>
+                $('#location-button').click(function () {
+                    if (navigator.geolocation)
+                        navigator.geolocation.getCurrentPosition(function (position) {
+                            console.log(position);
+                            $.get("http://maps.googleapis.com/maps/api/geocode/json?latlng=" +
+                                position.coords.latitude + "," + position.coords.longitude + "&sensor-false", function (data) {
+                                    console.log(data);
+                                })
+
+                            var img = new Image();
+                            img.src = "https://maps.googleapis.com/maps.apis/staticmap?center=" +
+                                position.coords.latitude + "," + position.coords.longitude + "&zoom=13&size=800x400&sensoe=false";
+                            $('output').html(img);
+
+                        });
+                    else
+                        console.log("geolocation is not supported");
+                });
+            </script>
+
+
+            <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+                integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+                crossorigin="anonymous"></script>
+            <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+                integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+                crossorigin="anonymous"></script>
+            <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+                integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
+                crossorigin="anonymous"></script>
+</body>
+
+</html>
