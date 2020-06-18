@@ -34,7 +34,7 @@ function setCanvas() {
     _stage = _canvas.getContext('2d');
     _canvas.width = _puzzleWidth;
     _canvas.height = _puzzleHeight;
-    _canvas.style.border = "1px grey";
+    _canvas.style.border = "2px black";
 }
 
 function initPuzzle() {
@@ -51,12 +51,12 @@ function createTitle(msg) {
     _stage.fillStyle = "#000000";
     _stage.globalAlpha = .4;
     _stage.fillRect(100, _puzzleHeight - 40, _puzzleWidth - 200, 40);
-    _stage.fillStyle = "#FFFFFF";
+    _stage.fillStyle = "black";
     _stage.globalAlpha = 1;
     _stage.textAlign = "center";
     _stage.textBaseline = "middle";
-    _stage.font = "18px Helvetica";
-    _stage.fillText(msg, _puzzleWidth / 2, _puzzleHeight - 20);
+    _stage.font = "200px Helvetica";
+    _stage.fillText(msg, _puzzleWidth / 2, _puzzleHeight - 1200);
 }
 
 function buildPieces() {
@@ -122,7 +122,7 @@ function onPuzzleCLick(e) {
         _stage.globalAlpha = .9;
         _stage.drawImage(_img, _currentPiece.sx, _currentPiece.sy,
             _pieceWidth, _pieceHeight, _mouse.x - (_pieceWidth / 2),
-            _mouse.y - (pieceHeight / 2), _pieceWidth, _pieceHeight);
+            _mouse.y - (_pieceHeight / 2), _pieceWidth, _pieceHeight);
 
         _stage.restore();
         document.onmousemove = updatePuzzle;
@@ -130,7 +130,7 @@ function onPuzzleCLick(e) {
     }
 }
 
-function checkPieceCLicked() {
+function checkPieceClicked() {
     var i;
     var piece;
     for (i = 0; i < _pieces.length; i++) {
@@ -158,15 +158,15 @@ function updatePuzzle(e) {
     _stage.clearRect(0, 0, _puzzleWidth, _puzzleHeight);
     var i;
     var piece;
-    for (i = 0; i < _piece.length; i++) {
+    for (i = 0; i < _pieces.length; i++) {
         piece = _pieces[i];
         if (piece == _currentPiece) {
             continue;
         }
         _stage.drawImage(_img, piece.sx, piece.sy,
-            _pieceWidth, _pieceHeight, piece.xPos, piece.yPos, _pieceWidth, pieceHeight);
+            _pieceWidth, _pieceHeight, piece.xPos, piece.yPos, _pieceWidth, _pieceHeight);
 
-        _stage.strokeRect(piece.xPos, piece.yPos, _pieceWidth, pieceHeight);
+        _stage.strokeRect(piece.xPos, piece.yPos, _pieceWidth, _pieceHeight);
         if (_currentDropPiece == null) {
             if (_mouse.x < piece.xPos || _mouse.x > (piece.xPos + _pieceWidth) ||
                 _mouse.y < piece.yPos || _mouse.y > (piece.yPos + _pieceHeight)) {

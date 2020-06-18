@@ -1,5 +1,6 @@
 main {
-    background-image: url("/img/Spiderman.jpg");
+    background-image: url("/img/Spiderhead (2).png");
     min-height: 400px;
+    opacity: 0.75;
     background-size: cover;
 }
